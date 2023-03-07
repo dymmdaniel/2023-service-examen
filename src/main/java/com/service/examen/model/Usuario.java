@@ -1,6 +1,7 @@
 package com.service.examen.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -40,7 +41,7 @@ public class Usuario {
     private boolean enabled=true;
 
     private String perfil;
-
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER,mappedBy = "usuario")
     private Set<UsuarioRol> usuarioRoles = new HashSet<>();
 }

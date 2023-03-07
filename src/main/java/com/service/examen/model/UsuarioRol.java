@@ -1,6 +1,9 @@
 package com.service.examen.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 public class UsuarioRol {
@@ -14,4 +17,28 @@ public class UsuarioRol {
 
     @ManyToOne  //Muchos a muchos
     private Rol rol;
+
+    public Long getUsuarioRolId() {
+        return usuarioRolId;
+    }
+
+    public void setUsuarioRolId(Long usuarioRolId) {
+        this.usuarioRolId = usuarioRolId;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
 }

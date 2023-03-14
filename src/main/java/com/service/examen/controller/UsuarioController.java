@@ -16,6 +16,8 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/usuario")
+//@CrossOrigin("*")Recibir cualquier tipo de peticiones
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 public class UsuarioController {
 
     @Autowired
@@ -23,6 +25,7 @@ public class UsuarioController {
 
     @PostMapping("/")
     public ResponseEntity<?> guardarUsuario(@RequestBody Usuario usuario) throws  Exception{
+        usuario.setPerfil("default.png");
         Set<UsuarioRol> roles = new HashSet<>();
         Rol rol = new Rol();
         rol.setRolId(2l);
@@ -50,8 +53,9 @@ public class UsuarioController {
     }
 
     @PostMapping("/xd")
-    public ResponseEntity<?> pruebaMateo(@RequestHeader("Authorization") String value){
-        System.out.println("Este es el token: "+value);
+    public ResponseEntity<?> pruebaMateo(){
+        String value="Basic U1VQRVI6U1VQRVI=";
+        System.out.println("Este es el token: ");
         if(value.equals("Basic U1VQRVI6U1VQRVI=")){
             return ResponseEntity.status(HttpStatus.OK).body("Aceptado");
         }

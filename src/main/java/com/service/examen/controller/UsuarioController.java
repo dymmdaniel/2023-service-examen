@@ -3,6 +3,7 @@ package com.service.examen.controller;
 import com.service.examen.model.Rol;
 import com.service.examen.model.Usuario;
 import com.service.examen.model.UsuarioRol;
+import com.service.examen.service.RolService;
 import com.service.examen.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -23,17 +24,20 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private RolService rolService;
+
     @PostMapping("/")
     public ResponseEntity<?> guardarUsuario(@RequestBody Usuario usuario) throws  Exception{
-        usuario.setPerfil("default.png");
-        Set<UsuarioRol> roles = new HashSet<>();
-        Rol rol = new Rol();
-        rol.setRolId(2l);
-        rol.setNombre("ROLE_USUARIO");
 
+        usuario.setPerfil("default.png");
+        Rol rol = rolService.buscarRol((long) 2); //ROLE_USER
+
+        Set<UsuarioRol> roles = new HashSet<>();
         UsuarioRol usuarioRol= new UsuarioRol();
-        usuarioRol.setUsuario(usuario);
         usuarioRol.setRol(rol);
+        usuarioRol.setUsuario(usuario);
+        roles.add(usuarioRol);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.guardarUsuario(usuario,roles));
     }

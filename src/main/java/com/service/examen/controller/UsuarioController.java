@@ -4,11 +4,8 @@ import com.service.examen.model.Order;
 import com.service.examen.model.Rol;
 import com.service.examen.model.Usuario;
 import com.service.examen.model.UsuarioRol;
-<<<<<<< Updated upstream
 import com.service.examen.service.RolService;
-=======
 import com.service.examen.service.OrderService;
->>>>>>> Stashed changes
 import com.service.examen.service.UsuarioService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +29,10 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @Autowired
-<<<<<<< Updated upstream
     private RolService rolService;
-=======
+
+    @Autowired
     private OrderService orderService;
->>>>>>> Stashed changes
 
     @PostMapping("/")
     public ResponseEntity<?> guardarUsuario(@RequestBody Usuario usuario) throws  Exception{
